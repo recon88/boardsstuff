@@ -1,0 +1,39 @@
+@media screen and (max-width:700px) {
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .up-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .up-vote	{
+		background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+	}
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .down-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .down-vote {
+		background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+	}
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .up-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .up-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .up-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .up-vote:hover {
+		background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+	}
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .down-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .down-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .down-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .down-vote:hover	{
+		background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+	}
+}
+
+body.apollo .riot-apollo.voting ul.riot-voting li .up-vote,
+body.apollo .riot-apollo.voting ul.riot-voting.downVoted li .up-vote {
+	background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+}
+body.apollo .riot-apollo.voting ul.riot-voting li .down-vote,
+body.apollo .riot-apollo.voting ul.riot-voting.upVoted li .down-vote {
+	background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+}
+body.apollo .small .riot-apollo.voting ul.riot-voting li .up-vote,
+body.apollo .small .riot-apollo.voting ul.riot-voting.downVoted li .up-vote {
+	background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+}
+body.apollo .small .riot-apollo.voting ul.riot-voting li .down-vote,
+body.apollo .small .riot-apollo.voting ul.riot-voting.upVoted .down-vote {
+	background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+}
