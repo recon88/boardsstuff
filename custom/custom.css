@@ -37,3 +37,29 @@ body.apollo .small .riot-apollo.voting ul.riot-voting li .down-vote,
 body.apollo .small .riot-apollo.voting ul.riot-voting.upVoted .down-vote {
 	background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
 }
+.discussion-list-item .riot-commented .dtb-fist {
+	display:inline-block;
+	background-image:url("https://lolstatic-a.akamaihd.net/apollo/assets/custom/pinned.png") !important;
+	width:23px!important;
+	height:23px!important;
+	background-size:contain;
+}
+#red-tracker .redtracker-list-item .row .nested-indicator .leading-arrow {
+	margin:0px auto;
+	background-image:url(/images/sprite-master-f092f118123c35787b367f855ea0125b.png) !important;
+	background-position:-436px -351px !important;
+	width:23px !important;
+	height:23px !important;
+	background-size:auto !important;
+	
+	-webkit-transition: -webkit-transform .2s ease-in-out;
+    -ms-transition: -ms-transform .2s ease-in-out;
+    transition: transform .2s ease-in-out;  
+}
+.discussion-list-item .riot-commented .dtb-fist {
+	display:inline-block;
+	background-image:url("https://lolstatic-a.akamaihd.net/apollo/assets/custom/pinned.png") !important;
+	width:23px!important;
+	height:23px!important;
+	background-size:contain;
+}
