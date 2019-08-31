@@ -63,3 +63,28 @@ body.apollo .small .riot-apollo.voting ul.riot-voting.upVoted .down-vote {
 	height:23px!important;
 	background-size:contain;
 }
+
+.inline-profile .icon {
+    float: left;
+    margin-top: -3px;
+    margin-right: 5px;
+    width: 50px;
+    height: 28px;
+}
+/*
+Changes for new Logo
+*/
+.inline-profile .icon {
+    width: 50px !important;
+    height: 28px !important;
+}
+.inline-profile .icon img {
+    width: 50px !important;
+    height: 28px !important;
+}
+#discussion .masthead .discussion-title .author-info {
+    font-size: 14px !important;
+}
+.tags {
+    font-size: 14px !important;
+}
