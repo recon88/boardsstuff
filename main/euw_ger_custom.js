@@ -1277,7 +1277,4 @@
 		observeTarget(body,false);
 	}
 	main();
-	var script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/gh/recon88/boardsstuff/custom/custom.js";
-    document.head.appendChild(script);
 }(jQuery,this,this.localStorage));
