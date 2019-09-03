@@ -1,0 +1,816 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,500,600');
+@import url('https://cdn.jsdelivr.net/gh/recon88/boardsstuff/custom/custom.css');
+.riot-apollo.voting .vote-breakdown {
+	display:none;
+}
+.backdrop {
+	position:fixed;
+	top:0;
+}
+
+.riot-apollo.voting .vote-total {
+	display:block;
+	font-size:1.3em;
+}
+.discussion-list-item .riot-apollo.voting:hover .vote-breakdown {
+	display:block!important;
+}
+.discussion-list-item .riot-apollo.voting:hover .vote-total {
+	display:none;
+}
+
+.nested-comment .riot-apollo.voting .vote-breakdown {
+	padding:4px 0px 2px 0px;
+}
+#discussion .riot-apollo.voting .vote-breakdown {
+	padding:6px 0px 2px 0px;
+}
+html body .backdrop .header {
+	background-image: url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/header_v2.png);
+}
+
+blockquote > h3 {
+	background-color: #315c6c;
+	border-radius:2px;
+	padding:7px;
+}
+/*blockquote h3 * {
+	display:none;
+}*/
+blockquote > h3 * {
+	transition: opacity .4s ease-in, max-height .4s ease-out;
+    opacity: 0; 
+    max-height: 0;
+	display:block;
+    overflow: hidden;
+	color: white;
+	font-style: normal;
+}
+blockquote > h3::before {
+	content: "Hover to reveal spoiler";
+	display:block;
+	color:#fff;
+	font-weight:bold;
+	text-align:center;
+	border-radius:3px;
+	background-color:#113847;
+	font-family:"Beaufort for LoL";
+	text-transform:uppercase;
+}
+blockquote:hover > h3 * {
+	opacity: 1;
+	transition: opacity .4s ease-out, max-height .4s ease-in;
+    max-height: 9999px;
+}
+h1 > strong > em > del,
+h2 > strong > em > del,
+h4 > strong > em > del,
+h5 > strong > em > del,
+h6 > strong > em > del {
+	text-decoration:none;
+	font-style:normal;
+	font-weight:bold;
+	font-size:20px;
+	font-family:"Beaufort for LoL";
+	letter-spacing:1px;
+}
+h1 > strong > em > del {color:#f06666}
+h2 > strong > em > del {color:#ffb734}
+h4 > strong > em > del {color:#95d168}
+h5 > strong > em > del {color:#00c9ea}
+h6 > strong > em > del {color:#d388b1}
+
+em > strong > del,em > em > del,em > strong > em > del {
+	background-color:#750075;
+	color:#fff;
+	text-decoration:none;
+	font-style:normal;
+	padding:0 5px;
+	margin:0 2px;
+	border-radius:5px;
+	font-weight:normal;
+}
+em > em > del { 
+	background-color:#00717f;
+}
+strong > em > em > del { 
+	background-color:#007529;
+}
+em > strong > em > del {
+	background-color:#7f1818;
+}
+
+body.apollo .riot-apollo.voting ul.riot-voting li .up-vote,
+body.apollo .riot-apollo.voting ul.riot-voting.downVoted li .up-vote {
+	background-image:url(sprites2.png);
+	background-position:-153px 0px;
+}
+body.apollo .riot-apollo.voting ul.riot-voting.downVoted li .up-vote:hover,
+body.apollo .riot-apollo.voting ul.riot-voting li .up-vote:hover,
+body.apollo .riot-apollo.voting ul.riot-voting.upVoted li .up-vote,
+body.apollo .riot-apollo.voting ul.riot-voting.upVoted li .up-vote:hover {
+	background-position:-102px 0px;
+}
+body.apollo .riot-apollo.voting ul.riot-voting li .down-vote,
+body.apollo .riot-apollo.voting ul.riot-voting.upVoted li .down-vote {
+	background-image:url(sprites2.png);
+	background-position:-357px 0px;
+}
+body.apollo .riot-apollo.voting ul.riot-voting.downVoted li .down-vote,
+body.apollo .riot-apollo.voting ul.riot-voting.downVoted li .down-vote:hover,
+body.apollo .riot-apollo.voting ul.riot-voting li .down-vote:hover,
+body.apollo .riot-apollo.voting ul.riot-voting.upVoted li .down-vote:hover {
+	background-position:-255px 0px;
+}
+
+
+
+body.apollo .small .riot-apollo.voting ul.riot-voting li .up-vote,
+body.apollo .small .riot-apollo.voting ul.riot-voting.downVoted li .up-vote {
+	background-image:url(sprites2.png);
+	background-position:-315px -41px;
+}
+body.apollo .small .riot-apollo.voting ul.riot-voting li .down-vote,
+body.apollo .small .riot-apollo.voting ul.riot-voting.upVoted .down-vote {
+	background-image:url(sprites2.png);
+	background-position:-90px -41px;
+}
+body.apollo .small .riot-apollo.voting ul.riot-voting.upVoted .up-vote,
+body.apollo .small .riot-apollo.voting ul.riot-voting.downVoted li .up-vote:hover,
+body.apollo .small .riot-apollo.voting ul.riot-voting.upVoted .up-vote:hover,
+body.apollo .small .riot-apollo.voting ul.riot-voting li .up-vote:hover {
+	background-position:-45px -41px;
+}
+body.apollo .small .riot-apollo.voting ul.riot-voting.downVoted li .down-vote,
+body.apollo .small .riot-apollo.voting ul.riot-voting.upVoted .down-vote:hover,
+body.apollo .small .riot-apollo.voting ul.riot-voting li .down-vote:hover,
+body.apollo .small .riot-apollo.voting ul.riot-voting.downVoted li .down-vote:hover {
+	background-position:-270px -41px;
+}
+.nested-comment .body-container .body .sticker, .toolbar_dropdown .frame .sticker {width:100px;height:100px;background-size:cover}
+#navigation-container .markdown-nav, .board-navigation .markdown-nav {
+	font-family:"Beaufort for LOL",sans-serif;
+}
+#board-sidebar-image img {
+	height:124px;
+	opacity:.8;
+	transition: opacity .2s ease-out;
+	-moz-transition: opacity .2s ease-out;
+	-webkit-transition: opacity .2s ease-out;
+	-o-transition: opacity .2s ease-out;
+}
+#board-sidebar-image img:hover {opacity:1}
+#board-sidebar-image {background:black}
+.side .new-discussion-box.box {
+	padding:0;
+}
+.side .new-discussion-box.box .create-discussion-cta {
+	outline:1px solid #775c31;
+}
+.side .new-discussion-box.box .create-discussion-cta:hover {
+	outline:1px solid #bba683;
+}
+iframe.embedly-embed {
+	width:100%;
+	min-height:400px;
+}
+.nested-comment .body-container .body span.high-quality, #discussion #content div.body {
+	max-width:700px;
+}
+/* Featured Content */
+#featured {
+	display:flex;
+	flex-direction:row;
+	align-items:stretch;
+}
+#featured .featured-core {
+	background-color: #171819;
+	height:100%;
+	overflow:hidden;
+}
+#featured .featured-item {
+	flex: 1 1;
+	display:flex;
+	flex-direction:column;
+	border:1px solid #525252;
+	position:relative;
+	border-radius:3px;
+}
+#featured .featured-item:nth-child(2) {
+	margin: 0 10px;
+} 
+#featured .featured-image {
+	width:100%;
+	border-bottom: 1px solid gold;
+}
+#featured .featured-title {
+	font-family:"Beaufort for LOL", sans-serif;
+	font-weight:bold;
+	text-transform:uppercase;
+	font-size:1.3em;
+	color: #e0c481;
+	padding-bottom:3px;
+}
+#featured .featured-desc {
+	color: #A09B8C;
+	font-family:"Beaufort for LOL",sans-serif;
+}
+#featured .bottom-content {
+	padding: 6%;
+}
+#featured .tooltip-main {
+	position:absolute;
+	height:100%;
+	width:100%;
+	opacity:0;
+	border:1px solid #ad8800;
+}
+#featured .banner-container {
+	width:100%;
+	display:flex;
+	position:absolute;
+	flex-direction:column;
+	align-items:center;
+}
+#featured .featured-banner {
+	flex:0 1;
+	width:65%;
+}
+#featured .tooltip-link {
+	width:100%;
+	height:100%;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	text-decoration:none;
+}
+#featured .tooltip-inner {
+	text-align:center;
+	font-family:"Beaufort for LOL", sans-serif;
+	font-weight:bold;
+	text-transform:uppercase;
+	font-size:1.5em;
+}
+
+#featured .featured-item:hover .tooltip-main {
+	background-color: rgba(0,0,0,.5);
+	-webkit-transition:opacity .3s linear;
+	-ms-transition:opacity .3s linear;
+	-moz-transition:opacity .3s linear;
+	-o-transition:opacity .3s linear;
+	transition:opacity .3s linear;
+	opacity:1;
+}
+
+
+
+h1,h2,h3,h4,h5 {
+	color: #d5d1c2;
+}
+body .backdrop .magic {
+	background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/boards_magic.jpg)
+}
+/* Index Pages */
+.box.main {
+	background-color:rgba(12, 27, 36, .95);
+}
+.discussion-list-item td, #red-tracker .redtracker-list-item .row, #red-tracker .redtracker-list-item .body {
+	border-bottom: 1px solid #2b363b;
+}
+.column.side > * {
+	background-color: #16181C;
+}
+#red-tracker,.side .box, #discussion, #discussions .discussion-list, #board-sidebar-image, .box.show-more,.report-widget,#comments>.paging {
+	border: 1px solid #775c31;
+	/*border-radius:3px;*/
+}
+.riot_apollo[data-poll-widget=show] h1 {
+	font-family:"Beaufort for LoL",serif;
+	color:#cccdc8;
+	font-size:25px;
+	font-weight:500;
+	padding-bottom:10px;
+}
+#discussion .masthead,.comments-header-container header {
+	border-bottom: 1px solid #775c31;
+}
+#discussion #social-bar {
+	border-top: 1px solid #775c31; 
+}
+.box.secondary {
+	background-color: rgba(20, 41, 57, .95);
+}
+body a, body a:visited, .apollo-header .controls a, .apollo-header .controls {
+	color:#b49a5d;
+}
+body .byline,.nested-comment .body-container .body blockquote .markdown-meta-quoted {
+	color:#898577!important;
+}
+.discussion-list-item .title .discussion-title a, #red-tracker .redtracker-list-item .row .title-box a.title-link {
+	color: #b6b5ae;
+	font-family:"Lato",sans-serif;
+	font-weight:500;
+}
+.discussion-list-item .title .discussion-title a:visited, #red-tracker .redtracker-list-item .row .title-box a.title-link:visited {
+	color: #817d6e;
+}
+
+.apollo-header h2 a {
+	color: #d0cecb;
+}
+tr.discussion-list-item:hover {
+	background-color:#142f3f;
+}
+.apollo-header .breadcrumb li a {
+	color: #e0c481;
+}
+.reply.form-container textarea, .edit.form-container textarea {
+	overflow-y:scroll!important;
+}
+.flat .reply.form-container .textarea-holder, .flat .edit.form-container .textarea-holder, .reply.form-container .textarea-holder, .edit.form-container .textarea-holder, #submit input.box, #submit textarea.box {
+	background-color: #041118;
+	border: 1px solid #775c31; 
+	color:#B09C87;
+}
+.flat .reply.form-container .bottom-bar, .flat .edit.form-container .bottom-bar, .reply.form-container .bottom-bar, .edit.form-container .bottom-bar {
+	border: 1px solid #775c31; 
+	border-top:none;
+	background-color: #0c1d26;
+}
+#discussion .title span {
+	font-family: "Beaufort for LOL", sans-serif;
+}
+#markdown-nav {
+	color: #c2c1c0;
+}
+#navigation-container a {
+	color: #c5aa6a;
+}
+.expanding-wrapper ::placeholder {
+	color:#d5d1c2!important;
+	font-size:0.8em;
+}
+.expanding-wrapper :-ms-input-placeholder {
+	color:#d5d1c2!important;
+	font-size:0.8em;
+}
+.expanding-wrapper ::-ms-input-placeholder {
+	color:#d5d1c2!important;
+	font-size:0.8em;
+}
+.comments-header-container {
+	background-color:rgba(0, 0, 0, .75);
+	padding:30px 20px 20px;
+	margin-bottom:10px;
+}
+.nested-comment .body-container .header .inline-profile {
+	font-family:"Beaufort for LOL",sans-serif;
+	font-variant:normal;
+	letter-spacing:0;
+}
+.body-container .inline-profile a {
+	font-weight:bold;
+}
+
+.reply.box.main {
+	background-color:#041118;
+}
+.reply.box.secondary,.report-widget {
+	background-color:#0c1c25;
+}
+
+.nested-comment .body-container .body, #discussion #content {
+	color:#abaaa8;
+}
+.comments-header-container header .discuss {
+	color:#cec8c4;
+}
+
+.nested-comment,.nested-comment.flat {
+	border: 1px solid #775c31;
+	padding-right:5px;
+}
+.nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment
+ {
+	/*background-color: #0c1c25;*/
+	background-color:rgba(12, 28, 37, .95);
+}
+.nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment,
+.nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment .list .nested-comment {
+	background-color: #041118;
+}
+.reply.form-container.main .textarea-holder, .edit.form-container.main .textarea-holder {
+	background-color:#0c1d26;
+}
+.reply.form-container.main .bottom-bar, .edit.form-container.main .bottom-bar {
+	background-color:#041018;
+}
+
+.reply.form-container .preview.box, .edit.form-container .preview.box {
+	border:1px solid #775c31;
+	border-top:none;
+	background-color:#041118;
+}
+.nested-comment.isOP>.body-container>.header>.inline-profile .username {
+	background-color:#404040;
+}
+.nested-comment.isPinned .flat-pinned .pin-label,.comments-header-container header .sorting {
+	color:#94724D;
+}
+li.clearfix.riot.unread {
+	border-left:2px solid #b31313;
+}
+body .player-messaging .viewport .message-list ul li.active {
+	border-left:2px solid #fafafa;
+}
+body .viewport .entry .details .timeago,body .player-messaging .viewport .reading-pane .messaging-header .timeago {
+	color:#cfcfcf;
+}
+body .player-messaging .viewport span.subject,body .player-messaging .viewport .reading-pane .messaging-header h1 {
+	color:#ffdf8e;
+}
+
+.messaging-body blockquote {
+	border:1px solid #e0e0e0;
+	border-left:7px solid #e0e0e0;
+	margin:0;
+	padding-left:10px;
+}
+.nested-comment a.toggle-minimized {
+	height:22px;
+	width:22px;
+	right:inherit;
+	background-position:0 0;
+	background-image:url(https://news-a.akamaihd.net/public/images/oce/Community/Boards/expand.png);
+	top:-10px;
+	left:-10px;
+	z-index:1;
+}
+.nested-comment.isMinimized a.toggle-minimized {
+	background-image:url(https://news-a.akamaihd.net/public/images/oce/Community/Boards/expand.png);
+	background-position:0 -22px;
+	height:22px;
+	width:22px;
+}
+body .player-messaging .viewport .reading-pane .messaging-body li {
+	margin-left:20px;
+	color:#ddd9cd;
+}
+.nested-comment.isPinned>.body-container>.body span.low-quality {
+	display:none;
+}
+.nested-comment.isPinned>.body-container>.body span.high-quality {
+	display:block;
+}
+.nested-comment.isPinned>.body-container>.footer {
+	display:block;
+}
+.nested-comment.isPinned>.small>.voting {
+	display:block;
+}
+.nested-comment.isPinned>.body-container {
+	margin-left:45px;
+}
+#riot-apollo-tooltip-container {
+	z-index:2;
+	width:100%;
+	max-width:100%;
+	text-align:center;
+	background-color:#c73700;
+	color:#fff;
+	cursor:pointer;
+}
+
+#discussion-list .total-votes {
+	font-size:1.3em;
+}
+.comments-header-container header .num-comments label {
+	color: #aeaeae;
+}
+.locked,.voting-locked{
+    background-image:url(https://boards.na.leagueoflegends.com/images/sprite-master-f092f118123c35787b367f855ea0125b.png);
+    width:24px;
+    height:34px;
+    margin:0 auto
+}
+.locked{
+    background-position:-203px -143px
+}
+.voting-locked{
+    background-position:3px -344px
+}
+#discussion .oembed-content-block {
+	border:1px solid #394750;
+	background:#09141a;
+}
+.nested-comment .header.byline .op-ref-bar {
+	font-size:12px;
+	border:1px solid #607588;
+	border-left:4px solid #607588;
+	padding:2px 12px;
+	margin-left:7px;
+	white-space:nowrap;
+}
+.nested-comment .body-container .body .op-ref {
+	white-space:pre-wrap;
+	color:#B09C87;
+	border:1px dashed #607588;
+	padding:15px;
+	font-size:14px;
+	margin-bottom:15px;
+}
+.op-ref .msg-deleted {
+	color:#fff;
+	background-color:#9e2020;
+	padding:3px 10px;
+	border-radius:5px;
+	display:inline-flex;
+}
+.isDeleted .op-ref-bar {
+	display:none;
+}
+.req-min {
+	position:fixed;
+	bottom:15px;
+	width:100%;
+	display:flex;
+	align-items:center;
+	flex-direction:column;
+	z-index:1;
+}
+.req-min p {
+	width:80%;
+	text-align:center;
+	max-width:500px;
+	background-color:#8d754c;
+	color:#fff;
+	padding:10px;
+}
+.scroll-to-highlighted {
+	border:1px solid #b8b2b2;
+}
+.message-box {
+	max-width:500px;
+}
+/* TAGS */
+.tags {
+	font-size: 12px;
+	color: #fff;
+	border-radius: 10px;
+	padding: 2px 10px;
+	/*margin: 0px 10px 4px;*/
+	white-space:nowrap;
+	font-variant: normal;
+	letter-spacing: 0px;
+	font-family:"Spiegel-Regular",sans-serif;
+}
+.tags.subtag {
+	margin-left:5px;
+}
+.ttriangle {
+	width: 0;
+	height: 0;
+	border-left: 30px solid transparent;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+/** Red Tracker **/
+#red-tracker .redtracker-list-item .row .nested-indicator {
+	width:40px;
+}
+#red-tracker .redtracker-list-item .redtracker-list-item.expanded .row .nested-indicator .leading-arrow {
+	transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    -webkit-transform:rotate(90deg);
+}
+#red-tracker .redtracker-list-item .redtracker-list-item .body {
+	display:none;
+}
+#red-tracker .redtracker-list-item .redtracker-list-item.expanded .body {
+	display:block;
+	background-color:#002530;
+}
+
+
+#red-tracker .redtracker-list-item .redtracker-list-item {
+	display:none;
+}
+#red-tracker .redtracker-list-item.expanded .redtracker-list-item {
+	display:block;
+}
+#red-tracker .redtracker-list-item.expanded .redtracker-list-item .row .view-link a.view-link {
+	display:inline;
+}
+#red-tracker .redtracker-list-item.expanded .redtracker-list-item .row .view-link a.hide-link {
+	display:none;
+}
+#red-tracker .redtracker-list-item.expanded .redtracker-list-item.expanded .row .view-link a.view-link {
+	display:none;
+}
+#red-tracker .redtracker-list-item .body .content blockquote.vb-quote {
+	background-color:#041c21;
+}
+#red-tracker .redtracker-list-item.expanded .redtracker-list-item.expanded .row .view-link a.hide-link {
+	display:inline;
+}
+#red-tracker .byline a.rt-red-name {
+	color:#ae250f;
+}
+#red-tracker .redtracker-list-item .redtracker-list-item .row {
+	background-color:#1a2e3a;
+}
+#red-tracker .redtracker-list-item.redThread {
+	background-color:rgba(99, 0, 0, 0.5);
+}
+
+@media screen and (max-width:700px) {
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .up-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .up-vote	{
+		background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+	}
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .down-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .down-vote {
+		background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+	}
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .up-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .up-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .up-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .up-vote:hover {
+		background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+	}
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .down-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .down-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .down-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .down-vote:hover	{
+		background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+	}
+}
+
+@media screen and (max-width:700px) {
+	.nested-comment.isPinned>.body-container>.body {
+		padding-left:0;
+	}
+	#red-tracker .redtracker-list-item .row .view-link,#red-tracker .redtracker-list-item .row .riot-commented,#red-tracker .redtracker-list-item .row .num-comments {
+		display:none;
+	}
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .up-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .up-vote	{
+		background-image:url(sprites2.png);
+		background-position:-153px 0px;
+	}
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .down-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .down-vote {
+		background-image:url(sprites2.png);
+		background-position:-357px 0px;
+	}
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .up-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .up-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .up-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .up-vote:hover {
+		background-image:url(sprites2.png);
+		background-position:-102px 0px;
+	}
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.upVoted li .down-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .down-vote:hover,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated.downVoted li .down-vote,
+	body #page-main .riot-apollo.voting ul.riot-voting.authenticated li .down-vote:hover	{
+		background-image:url(sprites2.png);
+		background-position:-255px 0px;
+	}
+	.nested-comment .riot-apollo.voting .vote-breakdown {
+		padding:4px 0px 4px 0px;
+	}
+	
+	.nested-comment.isPinned>.body-container {
+		margin-left:0;
+	}
+	.flat.nested-comment.isPinned>.body-container {
+		padding-left:20px;
+	}
+	
+	.discussion-list-item.hasPinned {
+		padding-bottom:25px;
+	}
+	.discussion-list-item.hasPinned .riot-commented {
+		display:block;
+		position:absolute;
+		left:40px;
+		bottom:5px;
+		width:auto;
+		text-align:center;
+		line-height:17px;
+	}
+	.discussion-list-item.hasPinned .riot-commented .dtb-fist {
+		width:16px!important;
+		height:16px!important;
+	}
+	.discussion-list-item.hasPinned .riot-commented span {
+		font-size:12px;
+		display:inline-block;
+		padding-left:3px;
+	}
+	.discussion-list-item.hasPinned .riot-commented > * {
+		vertical-align:middle;
+	}
+	.nested-comment {padding:10px 0px 4px 4px;border-right:none}
+	#discussion #social-bar .right {display:block!important}
+	/** Re-enables the styling toolbar for mobile users **/
+	body .rfmtoolbar {display:block!important}
+	/** These fix the mobile site's formatting features **/
+	.reply.form-container .bottom-bar .rfmtoolbar, .edit.form-container .bottom-bar .rfmtoolbar {overflow-y:scroll}
+	html body .toolbar_dropdown {width:325px;margin-left:-55px}
+	#DropDown-slayer{left:18%!important}
+	#DropDown-champion{left:18%!important}
+	#DropDown-item{left:18%!important}
+	#DropDown-summoner{left:18%!important}
+	.discussion-list-item {
+		border-bottom:1px solid #242b2e;
+	}
+	#featured {
+		display:none;
+	}
+}
+
+
+
+body.apollo .riot-apollo.voting ul.riot-voting li .up-vote,
+body.apollo .riot-apollo.voting ul.riot-voting.downVoted li .up-vote {
+	background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+}
+body.apollo .riot-apollo.voting ul.riot-voting li .down-vote,
+body.apollo .riot-apollo.voting ul.riot-voting.upVoted li .down-vote {
+	background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+}
+body.apollo .small .riot-apollo.voting ul.riot-voting li .up-vote,
+body.apollo .small .riot-apollo.voting ul.riot-voting.downVoted li .up-vote {
+	background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+}
+body.apollo .small .riot-apollo.voting ul.riot-voting li .down-vote,
+body.apollo .small .riot-apollo.voting ul.riot-voting.upVoted .down-vote {
+	background-image:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/sprites2.png) !important;
+}
+.discussion-list-item .riot-commented .dtb-fist {
+	display:inline-block;
+	background-image:url("https://lolstatic-a.akamaihd.net/apollo/assets/custom/pinned.png") !important;
+	width:23px!important;
+	height:23px!important;
+	background-size:contain;
+}
+#red-tracker .redtracker-list-item .row .nested-indicator .leading-arrow {
+	margin:0px auto;
+	background-image:url(/images/sprite-master-f092f118123c35787b367f855ea0125b.png) !important;
+	background-position:-436px -351px !important;
+	width:23px !important;
+	height:23px !important;
+	background-size:auto !important;
+	
+	-webkit-transition: -webkit-transform .2s ease-in-out;
+    -ms-transition: -ms-transform .2s ease-in-out;
+    transition: transform .2s ease-in-out;  
+}
+.discussion-list-item .riot-commented .dtb-fist {
+	display:inline-block;
+	background-image:url("https://lolstatic-a.akamaihd.net/apollo/assets/custom/pinned.png") !important;
+	width:50px!important;
+	height:28px!important;
+    background-repeat: no-repeat;
+	background-size:contain;
+}
+
+.inline-profile .icon {
+    float: left;
+    margin-top: -3px;
+    margin-right: 5px;
+    width: 50px;
+    height: 28px;
+}
+/*
+Changes for new Logo
+*/
+.inline-profile .icon {
+    width: 50px !important;
+    height: 28px !important;
+}
+.inline-profile .icon img {
+    width: 50px !important;
+    height: 28px !important;
+}
+#discussion .masthead .discussion-title .author-info {
+    font-size: 14px !important;
+}
+.tags {
+    font-size: 14px !important;
+}
