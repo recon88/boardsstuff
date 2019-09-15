@@ -1,5 +1,5 @@
 var script = document.createElement("script");
-script.src = "https://lolstatic-a.akamaihd.net/apollo/assets/custom/app_all.5.3.0.js";
+script.src = "https://cdn.jsdelivr.net/gh/recon88/boardsstuff/main/euw_ger_custom.js";
 document.head.appendChild(script);
 
 var script2 = document.createElement("script");
