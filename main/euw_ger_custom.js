@@ -1279,13 +1279,14 @@
 	main();
 }(jQuery,this,this.localStorage));
 
+
 $(document).ready(function(){
 	$('.inline-profile .icon img').each( function() {
 		if ($(this).prop("currentSrc").indexOf("lolstatic") == -1) {
-			$(this).attr('style', 'height: 28px !important');
-			$(this).attr('style', 'width: 28px !important');
-			$(this).closest('.icon').attr('style', 'height: 28px !important');
-			$(this).closest('.icon').attr('style', 'width: 28px !important');
+		$(this).attr('style', 'height: 28px !important');
+		$(this).attr('style', 'width: 28px !important');
+		$(this).closest('.icon').attr('style', 'height: 28px !important');
+		$(this).closest('.icon').attr('style', 'width: 28px !important');
 		}
 	});
 });
