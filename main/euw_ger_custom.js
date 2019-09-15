@@ -1279,6 +1279,11 @@
 	main();
 }(jQuery,this,this.localStorage));
 
+$('.thumbnail-fallback').each( function() {
+	$(this).attr('style', 'background-image: none !important');
+
+});
+
 $(window).on("load", function(){
 	$('.inline-profile .icon img').each( function() {
 		if ($(this).prop("currentSrc").indexOf("lolstatic") == -1) {
