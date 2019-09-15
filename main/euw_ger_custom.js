@@ -1283,10 +1283,15 @@
 $(document).ready(function(){
 	$('.inline-profile .icon img').each( function() {
 		if ($(this).prop("currentSrc").indexOf("lolstatic") == -1) {
-		$(this).attr('style', 'height: 28px !important');
-		$(this).attr('style', 'width: 28px !important');
-		$(this).parent().attr('style', 'height: 28px !important');
-		$(this).parent().attr('style', 'width: 28px !important');
+			$(this).attr('style', 'height: 28px !important');
+			$(this).attr('style', 'width: 28px !important');
+			$(this).parent().attr('style', 'height: 28px !important');
+			$(this).parent().attr('style', 'width: 28px !important');
+		} else {
+			$(this).attr('style', 'height: 28px !important');
+			$(this).attr('style', 'width: 50px !important');
+			$(this).parent().attr('style', 'height: 28px !important');
+			$(this).parent().attr('style', 'width: 50px !important');
 		}
 	});
 });
