@@ -1285,7 +1285,7 @@ $(document).ready(function(){
 			$(this).attr('style', 'height: 28px !important');
 			$(this).attr('style', 'width: 28px !important');
 			$(this).closest('.icon').attr('style', 'height: 28px !important');
-			$(this).parents('.icon').attr('style', 'width: 28px !important');
+			$(this).closest('.icon').attr('style', 'width: 28px !important');
 		}
 	});
 });
