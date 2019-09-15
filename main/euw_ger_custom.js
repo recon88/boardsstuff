@@ -1279,8 +1279,7 @@
 	main();
 }(jQuery,this,this.localStorage));
 
-
-$(document).ready(function(){
+$(window).on("load", function(){
 	$('.inline-profile .icon img').each( function() {
 		if ($(this).prop("currentSrc").indexOf("lolstatic") == -1) {
 			$(this).attr('style', 'height: 28px !important');
