@@ -11,10 +11,6 @@ document.head.appendChild(script2);
 
 if ($("#discussion").data().discussionId === "c1XylYOm") { 
 
-var script = document.createElement("script");
-script.src = "https://cdn.jsdelivr.net/gh/recon88/boardsstuff/spielemitanderen/lazyload.min.js";
-document.head.appendChild(script);
-
 var script2 = document.createElement("script");
 script2.src = "https://cdn.jsdelivr.net/gh/recon88/boardsstuff/spielemitanderen/freewall.min.js";
 document.head.appendChild(script2);
@@ -24,11 +20,6 @@ script3.src = "https://static.boards.lol/js/ganalytics.js";
 document.head.appendChild(script3);
 
  
-      $(function() {
-      	var myLazyLoad = new LazyLoad();
-      	$("html body .backdrop .header").attr("style","background:url(https://lolstatic-a.akamaihd.net/apollo/assets/custom/ezreal_2019.png)!important;background-repeat:no-repeat!important");
-      });
-
    
 
       $(function() {
