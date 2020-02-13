@@ -1487,7 +1487,7 @@ function getRemainingNotifications(button) {
                 button.id = "modnotificationButtonUnread";
             }
             button.innerHTML = inner;
-			button.outerHTML = "<br>";
+			
             button.className = "notificationButton";
         }
     };
