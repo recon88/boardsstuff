@@ -1484,9 +1484,9 @@ function getRemainingNotifications(button) {
                 button.id = "notificationButtonRead";
             } else {
                 inner = "Ungelesene Moderationsbenachrichtigungen: " + tot;
-                button.id = "notificationButtonUnread";
+                button.id = "modnotificationButtonUnread";
             }
-            button.innerHTML = inner;
+            button.innerHTML = inner += "<br>";
             button.className = "notificationButton";
         }
     };
@@ -1503,8 +1503,13 @@ function getRemainingEvents(button){
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
             var data = JSON.parse(xhttp.responseText);
-            button.innerHTML = "Ungelesene Updates: "+data.searchResultsCount;
-            button.className = "eventButton";
+			var unreadcount = data.searchResultsCount;
+			if (unreadcount === 0) {
+				button.className = "eventButton";
+			} else {
+				button.className = "eventButtonUnread";
+			}
+            button.innerHTML = "Ungelesene Updates: "+unreadcount;
         }
     };
     xhttp.send(null);

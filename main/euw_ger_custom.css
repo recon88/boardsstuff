@@ -902,11 +902,20 @@ Changes for new Logo
 }
  
 #notificationButtonUnread {
-    background-color: red;
+    background-color: #111111;
+	color: #fb2323;
+}
+
+#modnotificationButtonUnread {
+    background-color: #111111;
+	color: #fb2323;
+	    font-family: "FF Mark W05";
 }
  
 #notificationButtonRead {
-    background-color: #0c2830;
+    background-color: #111111;
+	color: #F9F9F9;
+	    font-family: "FF Mark W05";
 }
  
 .notificationButton {
@@ -950,5 +959,13 @@ Changes for new Logo
 .eventButton {
     padding: 0;
     border: none;
-    background-color: #0c2830;
+    background-color: #111111;
+	    font-family: "FF Mark W05";
+}
+
+.eventButtonUnread {
+    padding: 0;
+    border: none;
+    background-color: #1999ff;
+	    font-family: "FF Mark W05";
 }
