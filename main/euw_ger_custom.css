@@ -813,3 +813,142 @@ Changes for new Logo
 .tags {
     font-size: 14px !important;
 }
+
+
+/* Mod und Post Notifications */
+#tableDiv {
+    float: left;
+    width: 15%;
+    display: inline-block;
+    box-sizing: border-box;
+    overflow: auto;
+    height: 90%;
+}
+ 
+#actionInfoCont {
+    width: 85%;
+    height: 80%;
+    padding: 10px;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: #0d1b22;
+    overflow: auto;
+    border: 1px solid #0c2830;
+}
+ 
+#wrapper {
+    display: block;
+    left: 10%;
+    width: 80%;
+    height: 500px;
+    z-index: 1200;
+    position: fixed;
+    top: 20%;
+    background: #060f16 !important;
+    border: 1px solid #0c2830;
+    border-radius: 0;
+}
+ 
+#header {
+    height: 10%;
+    padding: 6px;
+    box-sizing: border-box;
+    border: 1px solid #0c2830;
+}
+ 
+.modactionOverview>div>table>tbody {
+    overflow: scroll;
+}
+ 
+.modactionOverview>div>table>tbody>tr>td {
+    padding: 10px;
+}
+ 
+.modactionOverview>div>table>tbody>tr {
+    height: 75px;
+}
+ 
+.actionOverview {
+    width: 100%;
+    border: none;
+}
+ 
+#notificationBar {
+    position: relative;
+    top: 30%;
+    float: right;
+    right: 200px;
+}
+ 
+#closeImgContainer {
+    float: right
+}
+ 
+.notification_unread {
+    background-color: #3395b1;
+    background-image: -webkit-linear-gradient(#0b1721, #133744);
+}
+ 
+.notification_read:hover {
+    background-color: #1b3c65;
+}
+ 
+.notification_read {
+    background-color: #060f16;
+}
+ 
+.notification_read:hover {
+    background-color: #1b3c65;
+}
+ 
+#notificationButtonUnread {
+    background-color: red;
+}
+ 
+#notificationButtonRead {
+    background-color: #0c2830;
+}
+ 
+.notificationButton {
+    padding: 0;
+    border: none;
+    margin-right: 20px;
+}
+ 
+#modFooter {
+    text-align: center;
+    padding: 5px;
+}
+ 
+#modContBlocker {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .8);
+    z-index: 900;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+ 
+#actionInfoCont>ul {
+    padding-left: 20px;
+}
+ 
+.time {
+    display: block;
+    font-size: 10px;
+    line-height: 10px;
+    color: #1f6472;
+}
+ 
+.modActionQuote {
+    margin: 0px 0px 0px 20px;
+    border-left: 2px solid #493929;
+}
+ 
+.eventButton {
+    padding: 0;
+    border: none;
+    background-color: #0c2830;
+}

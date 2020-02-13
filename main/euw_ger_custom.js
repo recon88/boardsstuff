@@ -1299,3 +1299,356 @@ $(window).on("load", function(){
 		}
 	});
 });
+
+
+
+
+
+
+
+
+//Mod and Post Notifications
+$(window).on("load", function(){
+    var buttonContainer = document.createElement("div");
+    buttonContainer.id = "notificationBar";
+    createOpenButton(buttonContainer);
+    createInfoButton(buttonContainer);
+    var body = document.getElementById("riotbar-bar-content");
+    body.appendChild(buttonContainer);
+});
+
+function getData() {
+    var token = getApolloToken();
+    var url = "https://notifications.leagueoflegends.com/api/1.0/messages?read_state=all&limit=10&offset=0";
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url, true);
+    xhttp.setRequestHeader("X-PVPNET", token);
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+            var data = JSON.parse(xhttp.responseText);
+            var body = document.getElementsByTagName("body")[0];
+            var wrapper = createWrapper();
+            var textCont = createTextContainer();
+            var tableCont = createTableContainer();
+            var header = createHeader();
+            var footer = createFooter();
+            var blocker = createBlocker();
+            wrapper.appendChild(header);
+            wrapper.appendChild(textCont);
+            tableCreate(data, wrapper, textCont, tableCont);
+            wrapper.appendChild(footer);
+            body.appendChild(wrapper);
+            body.appendChild(blocker);
+            header.addEventListener("click", () => {
+                wrapper.remove();
+                blocker.remove();
+            });
+            showText(0, textCont, data);
+        }
+    };
+    xhttp.send(null);
+}
+
+function tableCreate(data, parent, textCont, tdiv) {
+    var tbl = document.createElement("table");
+    var tblBody = document.createElement("tbody");
+    for (var j = 0; j < data.messages.length; j++) {
+        var row = document.createElement("tr");
+        var cell = document.createElement("td");
+        var readstate = data.messages[j].readState == "unread";
+        var cellText = "";
+        if (!readstate) {
+            //cellText = "Ungelesen: "
+            row.classList.add("notification_unread");
+        } else {
+            row.classList.add("notification_read");
+        }
+
+        cellText = cellText + "<span class=\"subject\" style=\"display: block;\">" + data.messages[j].subject + "</span><span class=\"time\" style=\"display: block;\">" + realTime(data.messages[j].publishedAt) + "</span>";
+        cell.innerHTML = cellText;
+        row.appendChild(cell);
+        row.id = "actionOverview" + j;
+        var createClickHandler =
+            function(row, textCont, j, data) {
+                return function() {
+                    var cell = row.getElementsByTagName("td")[0];
+                    var id = cell.innerHTML;
+                    showText(j, textCont, data);
+                };
+            };
+        row.onclick = createClickHandler(row, textCont, j, data);
+        tblBody.appendChild(row);
+    }
+    tbl.appendChild(tblBody);
+    tbl.id = "actionOverview";
+    tdiv.appendChild(tbl);
+    parent.append(tdiv);
+}
+
+function showText(ind, parent, data) {
+    var subj = data.messages[ind].subject;
+    var body = data.messages[ind].body;
+    body = body.replace(/>.*?\[{quoted}\]\(.*?\)/g, "");
+    body = body.replace(/{{((champion)|(summoner)|(item)|(sticker)):.*?}}/g, "");
+    parent.innerHTML = "<h1>" + subj + "</h1><p>" + replaceMarkdown(body) + "</p>";
+    markAsRead(data.messages[ind].id);
+}
+
+function createBlocker() {
+    var blocker = document.createElement("div");
+    blocker.id = "modContBlocker";
+    return blocker;
+}
+
+function createTextContainer() {
+    var textCont = document.createElement("div");
+    textCont.id = "actionInfoCont";
+    return textCont
+}
+
+function createWrapper() {
+    var wrapper = document.createElement("div");
+    wrapper.className = "modactionOverview";
+    wrapper.id = "wrapper";
+    return wrapper
+}
+
+function createTableContainer() {
+    var tdiv = document.createElement("div");
+    tdiv.id = "tableDiv";
+    return tdiv;
+}
+
+function createHeader() {
+    var header = document.createElement("div");
+    header.id = "header";
+    var button = createCloseButton();
+    var h = document.createElement("H1");
+    var t = document.createTextNode("MODERATIONSBENACHRICHTIGUNGEN");
+    h.appendChild(t);
+    header.appendChild(button);
+    header.appendChild(h);
+    return header;
+}
+
+function createFooter() {
+    var footer = document.createElement("div");
+    footer.id = "modFooter";
+    footer.innerHTML = "<span>Allgemeine Informationen über die Moderation des Forums findest du hier:<br><a href=\"https://boards.euw.leagueoflegends.com/de/c/spielerverhalten-de/L6Exerv1-einblicke-in-die-forenmoderation\">Einblicke in die Forenmoderation</a></span>";
+    return footer
+}
+
+function createOpenButton(parent) {
+    var button = document.createElement("button");
+    button.id = "moderationOpenButton";
+    parent.appendChild(button);
+    getRemainingNotifications(button);
+    button.addEventListener("click", getData);
+}
+
+function createInfoButton(parent){
+    var button = document.createElement("button");
+    button.id = "eventUpdates";
+    parent.appendChild(button);
+    getRemainingEvents(button);
+    button.addEventListener("click", ()=>{window.open("https://boards.euw.leagueoflegends.com/de/myupdates")});
+}
+
+function createCloseButton() {
+    var button = document.createElement("div");
+    button.id = "closeImgContainer";
+    var img = document.createElement("img");
+    img.src = "https://cdn.leagueoflegends.com/apollo/assets/player-notifications/close_x.png"
+    button.appendChild(img);
+    return button
+}
+
+function realTime(timeString) {
+    var timeInfo = new Date(timeString);
+    return timeInfo.toLocaleString();
+}
+
+function getRemainingNotifications(button) {
+    var token = getApolloToken();
+    var url = "https://notifications.leagueoflegends.com/api/1.0/messages?read_state=unread&count=true";
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url, true);
+    xhttp.setRequestHeader("X-PVPNET", token);
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+            var data = JSON.parse(xhttp.responseText);
+            var inner = "";
+            var tot = data.total;
+            if (tot == 0) {
+                inner = "Moderationsbenachrichtigungen: 0";
+                button.id = "notificationButtonRead";
+            } else {
+                inner = "Ungelesene Moderationsbenachrichtigungen: " + tot;
+                button.id = "notificationButtonUnread";
+            }
+            button.innerHTML = inner;
+            button.className = "notificationButton";
+        }
+    };
+    xhttp.send(null);
+}
+
+function getRemainingEvents(button){
+    var token = getApolloToken();
+    var userID = getUserID();
+    var url = "https://apollo.euw.leagueoflegends.com/apollo/users/updatesCount/EUW/"+userID+"/";
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url, true);
+    xhttp.setRequestHeader("X-PVPNET", token);
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+            var data = JSON.parse(xhttp.responseText);
+            button.innerHTML = "Ungelesene Updates: "+data.searchResultsCount;
+            button.className = "eventButton";
+        }
+    };
+    xhttp.send(null);
+}
+
+function getApolloToken() {
+    var startStr = "PVPNET_TOKEN_EUW";
+    var start = document.cookie.indexOf(startStr) + startStr.length + 1;
+    var endStr = ";";
+    var end = document.cookie.indexOf(endStr, start + 5);
+    var token = document.cookie.substring(start, end);
+    token = "EUW:" + token;
+    return token;
+}
+
+function getUserID(){
+    var startStr = "PVPNET_ID_EUW";
+    var start = document.cookie.indexOf(startStr) + startStr.length + 1;
+    var endStr = ";";
+    var end = document.cookie.indexOf(endStr, start + 5);
+    var id = document.cookie.substring(start,end);
+    return id;
+}
+
+function markAsRead(id) {
+    var token = getApolloToken();
+    var url = "https://notifications.leagueoflegends.com/api/1.0/receipts";
+    var par = "{\"message\_ids\":[{\"id\":\"" + id + "\"}]}";
+    var params = JSON.parse(par);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", url, true);
+    xhttp.setRequestHeader("X-PVPNET", token);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onload = function() {};
+    xhttp.send(par);
+}
+
+/***   Regex Markdown Parser by chalarangelo   ***/
+// Replaces 'regex' with 'replacement' in 'str'
+// Curry function, usage: replaceRegex(regexVar, replacementVar) (strVar)
+const replaceRegex = function(regex, replacement) {
+    return function(str) {
+        return str.replace(regex, replacement);
+    }
+}
+// Regular expressions for Markdown (a bit strict, but they work)
+const codeBlockRegex = /((\n\t)(.*))+/g;
+const inlineCodeRegex = /(`)(.*?)\1/g;
+const imageRegex = /!\[([^\[]+)\]\(([^\)]+)\)/g;
+const linkRegex = /\[([^\[]+)\]\(([^\)]+)\)/g;
+const headingRegex = /\n(#+\s*)(.*)/g;
+const boldItalicsRegex = /(\*{1,2})(.*?)\1/g;
+const strikethroughRegex = /(\~\~)(.*?)\1/g;
+const blockquoteRegex = /\n(&gt;|\>)(.*)/g;
+const horizontalRuleRegex = /\n((\-{3,})|(={3,}))/g;
+const unorderedListRegex = /(\n\s*(\-|\+|\*)\s.*)+/g;
+const orderedListRegex = /(\n\s*([0-9]+\.)\s.*)+/g;
+const paragraphRegex = /\n+(?!<pre>)(?!<h)(?!<ul>)(?!<blockquote)(?!<hr)(?!\t)([^\n]+)\n/g;
+const urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)(?!.*?<\/a)/g;
+// Replacer functions for Markdown
+const codeBlockReplacer = function(fullMatch) {
+    return '\n<pre>' + fullMatch + '</pre>';
+}
+const inlineCodeReplacer = function(fullMatch, tagStart, tagContents) {
+    return '<code>' + tagContents + '</code>';
+}
+const imageReplacer = function(fullMatch, tagTitle, tagURL) {
+    return '<img src="' + tagURL + '" alt="' + tagTitle + '" />';
+}
+const linkReplacer = function(fullMatch, tagTitle, tagURL) {
+    return '<a href="' + tagURL + '">' + tagTitle + '</a>';
+}
+const headingReplacer = function(fullMatch, tagStart, tagContents) {
+    return '\n<h' + tagStart.trim().length + '>' + tagContents + '</h' + tagStart.trim().length + '>';
+}
+const boldItalicsReplacer = function(fullMatch, tagStart, tagContents) {
+    return '<' + ((tagStart.trim().length == 1) ? ('em') : ('strong')) + '>' + tagContents + '</' + ((tagStart.trim().length == 1) ? ('em') : ('strong')) + '>';
+}
+const strikethroughReplacer = function(fullMatch, tagStart, tagContents) {
+    return '<del>' + tagContents + '</del>';
+}
+const blockquoteReplacer = function(fullMatch, tagStart, tagContents) {
+    return '\n<blockquote class = "modActionQuote">' + tagContents + '</blockquote>';
+}
+const horizontalRuleReplacer = function(fullMatch) {
+    return '\n<hr />';
+}
+const unorderedListReplacer = function(fullMatch) {
+    let items = '';
+    fullMatch.trim().split('\n').forEach(item => {
+        items += '<li>' + item.substring(2) + '</li>';
+    });
+    return '\n<ul>' + items + '</ul>';
+}
+const orderedListReplacer = function(fullMatch) {
+    let items = '';
+    fullMatch.trim().split('\n').forEach(item => {
+        items += '<li>' + item.substring(item.indexOf('.') + 2) + '</li>';
+    });
+    return '\n<ol>' + items + '</ol>';
+}
+const paragraphReplacer = function(fullMatch, tagContents) {
+    return '<p>' + tagContents + '</p>';
+}
+const urlReplacer = function(fullMatch, urlContents) {
+    return '<a href="' + urlContents + '">' + urlContents + '</a>'
+}
+// Rules for Markdown parsing (use in order of appearance for best results)
+const replaceCodeBlocks = replaceRegex(codeBlockRegex, codeBlockReplacer);
+const replaceInlineCodes = replaceRegex(inlineCodeRegex, inlineCodeReplacer);
+const replaceImages = replaceRegex(imageRegex, imageReplacer);
+const replaceLinks = replaceRegex(linkRegex, linkReplacer);
+const replaceHeadings = replaceRegex(headingRegex, headingReplacer);
+const replaceBoldItalics = replaceRegex(boldItalicsRegex, boldItalicsReplacer);
+const replaceceStrikethrough = replaceRegex(strikethroughRegex, strikethroughReplacer);
+const replaceBlockquotes = replaceRegex(blockquoteRegex, blockquoteReplacer);
+const replaceHorizontalRules = replaceRegex(horizontalRuleRegex, horizontalRuleReplacer);
+const replaceUnorderedLists = replaceRegex(unorderedListRegex, unorderedListReplacer);
+const replaceOrderedLists = replaceRegex(orderedListRegex, orderedListReplacer);
+const replaceParagraphs = replaceRegex(paragraphRegex, paragraphReplacer);
+const replaceUrls = replaceRegex(urlRegex, urlReplacer);
+// Fix for tab-indexed code blocks
+const codeBlockFixRegex = /\n(<pre>)((\n|.)*)(<\/pre>)/g;
+const codeBlockFixer = function(fullMatch, tagStart, tagContents, lastMatch, tagEnd) {
+    let lines = '';
+    tagContents.split('\n').forEach(line => {
+        lines += line.substring(1) + '\n';
+    });
+    return tagStart + lines + tagEnd;
+}
+const fixCodeBlocks = replaceRegex(codeBlockFixRegex, codeBlockFixer);
+// Replacement rule order function for Markdown
+// Do not use as-is, prefer parseMarkdown as seen below
+const replaceMarkdown = function(str) {
+    return replaceParagraphs(replaceOrderedLists(replaceUnorderedLists(
+        replaceHorizontalRules(replaceBlockquotes(replaceceStrikethrough(
+            replaceBoldItalics(replaceHeadings(replaceUrls(replaceImages(
+                replaceInlineCodes(replaceCodeBlocks(replaceLinks(str)))
+            ))))
+        )))
+    )));
+}
+// Parser for Markdown (fixes code, adds empty lines around for parsing)
+// Usage: parseMarkdown(strVar)
+const parseMarkdown = function(str) {
+    return fixCodeBlocks(replaceMarkdown('\n' + str + '\n')).trim();
+}
