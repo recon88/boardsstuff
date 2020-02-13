@@ -1486,7 +1486,8 @@ function getRemainingNotifications(button) {
                 inner = "Ungelesene Moderationsbenachrichtigungen: " + tot;
                 button.id = "modnotificationButtonUnread";
             }
-            button.innerHTML = inner += "<br>";
+            button.innerHTML = inner;
+			button.outerHTML = "<br>";
             button.className = "notificationButton";
         }
     };
