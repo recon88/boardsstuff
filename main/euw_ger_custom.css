@@ -901,11 +901,6 @@ Changes for new Logo
     background-color: #1b3c65;
 }
  
-#notificationButtonUnread {
-    background-color: #111111;
-	color: #fb2323;
-}
-
 #modnotificationButtonUnread {
     background-color: #111111;
 	color: #fb2323;
@@ -961,11 +956,13 @@ Changes for new Logo
     border: none;
     background-color: #111111;
 	    font-family: "FF Mark W05";
+		color: #F9F9F9;
 }
 
 .eventButtonUnread {
     padding: 0;
     border: none;
-    background-color: #1999ff;
+    background-color: #111111;
 	    font-family: "FF Mark W05";
+		color: #00b6ff;
 }
